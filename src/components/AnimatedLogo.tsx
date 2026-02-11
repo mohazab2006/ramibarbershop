@@ -31,7 +31,11 @@ export function AnimatedLogo() {
   const handleClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     smoothScrollToTop();
-  }, []);
+    // Trigger animation on tap (mobile)
+    controls.start('hover').then(() => {
+      setTimeout(() => controls.start('idle'), 400);
+    });
+  }, [controls]);
 
   return (
     <a

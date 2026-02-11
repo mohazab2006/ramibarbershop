@@ -26,12 +26,12 @@ function smoothScrollToEl(id: string) {
 }
 
 const charVariants = {
-  hidden: { y: 80, opacity: 0 },
+  hidden: { y: 20, opacity: 0 },
   visible: (i: number) => ({
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.45,
       delay: i * 0.03,
       ease: [0.22, 1, 0.36, 1],
     },
@@ -40,7 +40,7 @@ const charVariants = {
 
 function AnimatedHeadline({ text, startDelay = 0 }: { text: string; startDelay?: number }) {
   return (
-    <span className="inline-block overflow-hidden">
+    <span className="inline-block">
       {text.split('').map((char, i) => (
         <motion.span
           key={`${char}-${i}`}

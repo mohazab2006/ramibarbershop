@@ -93,9 +93,9 @@ function VideoModal({
               </svg>
             </button>
             <div className="aspect-[9/16] w-full overflow-hidden rounded-xl bg-dark-card">
-              {/* Using direct src instead of <source> tag, no crossOrigin to avoid CORS issues with Supabase */}
+              {/* Proxy through same origin so Range requests and CORS work reliably */}
               <video
-                src={video.src}
+                src={`/api/proxy-video?url=${encodeURIComponent(video.src)}`}
                 poster={video.poster}
                 controls
                 autoPlay

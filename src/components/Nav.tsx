@@ -9,6 +9,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 const NAV_LINKS = [
+  { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
   { label: 'Work', href: '#transformations' },
   { label: 'Gallery', href: '#gallery' },
@@ -206,7 +207,7 @@ export function Nav() {
               >
                 <BookButton
                   onClick={() => {
-                    handleNavClick();
+                    setMobileOpen(false);
                     openBooking();
                   }}
                   size="sticky"

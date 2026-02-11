@@ -2,15 +2,14 @@
 
 import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
 import { useEffect, useRef } from 'react';
+import type { StatItem } from '@/lib/content';
 
-interface StatProps {
-  value: number;
-  suffix: string;
-  label: string;
-  delay?: number;
-}
-
-function AnimatedStat({ value, suffix, label, delay = 0 }: StatProps) {
+function AnimatedStat({
+  value,
+  suffix,
+  label,
+  delay = 0,
+}: StatItem & { delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-50px' });
   const count = useMotionValue(0);
@@ -47,29 +46,24 @@ function AnimatedStat({ value, suffix, label, delay = 0 }: StatProps) {
   );
 }
 
-const STATS = [
-  { value: 3, suffix: '+', label: 'Years Experience' },
-  { value: 2000, suffix: '+', label: 'Fades Done' },
-  { value: 5, suffix: '★', label: 'Avg Rating' },
-  { value: 10, suffix: 's', label: 'To Book' },
-];
+interface AboutStatsProps {
+  stats: StatItem[];
+}
 
-export function Stats() {
+export function AboutStats({ stats }: AboutStatsProps) {
   return (
-    <section className="relative pb-4 pt-6 md:pb-6 md:pt-8">
-      <div className="mx-auto max-w-4xl px-5">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12">
-          {STATS.map((stat, i) => (
-            <AnimatedStat
-              key={stat.label}
-              value={stat.value}
-              suffix={stat.suffix}
-              label={stat.label}
-              delay={i * 0.15}
-            />
-          ))}
-        </div>
+    <div className="mt-14 pt-12 border-t border-dark-border">
+      <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12">
+        {stats.map((stat, i) => (
+          <AnimatedStat
+            key={stat.label}
+            value={stat.value}
+            suffix={stat.suffix}
+            label={stat.label}
+            delay={i * 0.15}
+          />
+        ))}
       </div>
-    </section>
+    </div>
   );
 }

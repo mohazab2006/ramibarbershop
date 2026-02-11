@@ -15,6 +15,36 @@ export const HERO_IMAGE_URL =
 // export const HERO_VIDEO_URL = 'https://<project>.supabase.co/storage/v1/object/public/media/hero/hero-loop.mp4';
 export const HERO_VIDEO_URL: string | null = null;
 
+// --- ABOUT ---
+// Rami's photo: upload to Supabase media/about/ e.g. rami.jpg
+export const ABOUT_PHOTO_URL =
+  'https://eopeytscrcaamwnlzoho.supabase.co/storage/v1/object/public/media/about/rami.jpg';
+export const ABOUT_BIO =
+  'Ottawa-based barber with a passion for clean fades and sharp lineups. I focus on giving you a cut that fits your style and lifestyle.';
+
+export interface AboutTag {
+  label: string;
+  value: string;
+}
+export const ABOUT_TAGS: AboutTag[] = [
+  { label: 'Hobby', value: 'Soccer' },
+  { label: 'From', value: 'Algeria' },
+  { label: 'Art', value: 'Cutting Hair' },
+];
+
+// --- STATS (used in About section) ---
+export interface StatItem {
+  value: number;
+  suffix: string;
+  label: string;
+}
+export const STATS: StatItem[] = [
+  { value: 3, suffix: '+', label: 'Years Experience' },
+  { value: 2000, suffix: '+', label: 'Fades Done' },
+  { value: 5, suffix: '★', label: 'Avg Rating' },
+  { value: 10, suffix: 's', label: 'To Book' },
+];
+
 // --- SERVICES (local config, not from Square API) ---
 export interface Service {
   id: string;
@@ -142,14 +172,14 @@ export interface Review {
 export const REVIEWS: Review[] = [
   {
     id: 'r1',
-    name: 'Tarek H.',
+    name: 'James H.',
     text: 'Been going to Rami for over a year now. Nobody else touches my hair. The fade is always crisp and he actually listens to what you want.',
     rating: 5,
     timeAgo: '2 weeks ago',
   },
   {
     id: 'r2',
-    name: 'Omar A.',
+    name: 'Marcus T.',
     text: 'Best barber in Ottawa hands down. Booked online in literally 10 seconds and walked out looking fresh. Highly recommend.',
     rating: 5,
     timeAgo: '1 month ago',
@@ -163,21 +193,21 @@ export const REVIEWS: Review[] = [
   },
   {
     id: 'r4',
-    name: 'Mohamed S.',
+    name: 'Chris L.',
     text: 'Came in for a haircut before a wedding and Rami went above and beyond. Got so many compliments. Will never go anywhere else.',
     rating: 5,
     timeAgo: '1 month ago',
   },
   {
     id: 'r5',
-    name: 'Youssef R.',
+    name: 'Ryan P.',
     text: 'The vibe is unmatched. Great conversation, and you leave looking like a million bucks every single time.',
     rating: 4,
     timeAgo: '2 months ago',
   },
   {
     id: 'r6',
-    name: 'Khalil M.',
+    name: 'Omar A.',
     text: 'Drove 30 minutes just to get a cut from Rami. Worth every minute. The man is an artist with the clippers.',
     rating: 5,
     timeAgo: '3 weeks ago',

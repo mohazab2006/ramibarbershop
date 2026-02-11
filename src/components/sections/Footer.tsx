@@ -12,6 +12,7 @@ import {
 } from '@/lib/content';
 
 const FOOTER_LINKS = [
+  { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
   { label: 'Work', href: '#transformations' },
   { label: 'Videos', href: '#game-tape' },
