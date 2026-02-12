@@ -12,7 +12,7 @@ export const SQUARE_BOOKING_URL =
 export const HERO_IMAGE_URL =
   'https://eopeytscrcaamwnlzoho.supabase.co/storage/v1/object/public/media/hero/ramii.jpg';
 // Optional: video loop (mp4). Upload hero-loop.mp4 to media/hero/ in Supabase, then set the URL below. Poster shows until video loads; keep clip short (10–20s).
-export const HERO_VIDEO_URL = 'https://eopeytscrcaamwnlzoho.supabase.co/storage/v1/object/public/media/hero/hero-loop.mp4';
+export const HERO_VIDEO_URL = 'https://eopeytscrcaamwnlzoho.supabase.co/storage/v1/object/public/media/hero/hero-loop1.mp4';
 
 // --- ABOUT ---
 // Rami's photo: upload to Supabase media/about/ e.g. rami.jpg
