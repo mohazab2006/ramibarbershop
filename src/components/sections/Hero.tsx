@@ -96,10 +96,8 @@ export function Hero() {
               <AnimatedHeadline text="Precision cuts." />
             </span>
             <span className="block text-4xl font-bold leading-tight tracking-tight md:text-5xl lg:text-6xl">
-              {/* Gradient shimmer text */}
-              <span
-                className="bg-gradient-to-r from-white via-accent to-white bg-[length:200%_auto] bg-clip-text text-transparent animate-shimmer"
-              >
+              {/* Solid white on mobile (reliable); gradient shimmer on desktop */}
+              <span className="text-white md:bg-gradient-to-r md:from-white md:via-accent md:to-white md:bg-[length:200%_auto] md:bg-clip-text md:text-transparent md:animate-shimmer">
                 <AnimatedHeadline text="Clean fades." startDelay={15} />
               </span>
             </span>
