@@ -10,15 +10,14 @@ export const SQUARE_BOOKING_URL =
 // --- HERO ---
 // Replace with your Supabase public URL, e.g. https://<project>.supabase.co/storage/v1/object/public/media/hero/hero-bg.jpg
 export const HERO_IMAGE_URL =
-  'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1200&q=80';
-// Optional: video loop (mp4). Use poster for fast LCP.
-// export const HERO_VIDEO_URL = 'https://<project>.supabase.co/storage/v1/object/public/media/hero/hero-loop.mp4';
-export const HERO_VIDEO_URL: string | null = null;
+  'https://eopeytscrcaamwnlzoho.supabase.co/storage/v1/object/public/media/hero/ramii.jpg';
+// Optional: video loop (mp4). Upload hero-loop.mp4 to media/hero/ in Supabase, then set the URL below. Poster shows until video loads; keep clip short (10–20s).
+export const HERO_VIDEO_URL = 'https://eopeytscrcaamwnlzoho.supabase.co/storage/v1/object/public/media/hero/hero-loop.mp4';
 
 // --- ABOUT ---
 // Rami's photo: upload to Supabase media/about/ e.g. rami.jpg
 export const ABOUT_PHOTO_URL =
-  'https://eopeytscrcaamwnlzoho.supabase.co/storage/v1/object/public/media/about/rami.jpg';
+  'https://eopeytscrcaamwnlzoho.supabase.co/storage/v1/object/public/media/about/rami1.jpg';
 export const ABOUT_BIO =
   'Ottawa-based barber with a passion for clean fades and sharp lineups. I focus on giving you a cut that fits your style and lifestyle.';
 
