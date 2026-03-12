@@ -7,6 +7,13 @@
   --card: #161a20;
   --accent: #c9cdd3;
   --muted: #6b7280;
+  --scroll-progress: 0;
+}
+
+/* Scroll progress bar – driven by CSS variable (set by JS, no React state on scroll) */
+.scroll-progress-bar {
+  transform: scaleX(var(--scroll-progress, 0));
+  transform-origin: left;
 }
 
 /* smooth scroll handled by JS for slower, cinematic feel */

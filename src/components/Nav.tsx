@@ -104,7 +104,7 @@ export function Nav() {
         className={cn(
           'sticky top-0 z-30 transition-all duration-300',
           scrolled
-            ? 'border-b border-dark-border bg-dark-bg/95 backdrop-blur-lg'
+            ? 'border-b border-dark-border bg-dark-bg/95 backdrop-blur-md'
             : 'bg-transparent'
         )}
       >
@@ -182,7 +182,7 @@ export function Nav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-16 z-20 bg-dark-bg/98 backdrop-blur-xl md:hidden"
+            className="fixed inset-0 top-16 z-20 bg-dark-bg/98 backdrop-blur-md md:hidden"
           >
             <nav className="flex flex-col px-6 pt-8">
               {NAV_LINKS.map((link, i) => (
