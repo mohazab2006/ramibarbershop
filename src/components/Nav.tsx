@@ -57,26 +57,33 @@ export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Track scroll position for active section and navbar style
+  // Track scroll position for active section and navbar style (throttled to rAF to avoid jank)
   useEffect(() => {
+    let rafId: number | null = null;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-
-      const sections = NAV_LINKS.map((l) => l.href.slice(1));
-      let current = '';
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 120) current = id;
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20);
+        const sections = NAV_LINKS.map((l) => l.href.slice(1));
+        let current = '';
+        for (const id of sections) {
+          const el = document.getElementById(id);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= 120) current = id;
+          }
         }
-      }
-      setActiveSection(current);
+        setActiveSection(current);
+        rafId = null;
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   // Lock scroll when mobile menu is open

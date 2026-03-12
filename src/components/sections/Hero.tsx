@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { useBooking } from '@/context/BookingContext';
 import { BookButton } from '@/components/BookButton';
 import { HERO_IMAGE_URL, HERO_VIDEO_URL } from '@/lib/content';
+import { useEffect, useRef } from 'react';
 
 function smoothScrollToEl(id: string) {
   const el = document.getElementById(id);
@@ -59,17 +60,45 @@ function AnimatedHeadline({ text, startDelay = 0 }: { text: string; startDelay?:
 
 export function Hero() {
   const { openBooking } = useBooking();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Pause hero video when section is out of view to save CPU/battery
+  useEffect(() => {
+    if (!HERO_VIDEO_URL || !sectionRef.current || !videoRef.current) return;
+    const video = videoRef.current;
+    const section = sectionRef.current;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const [e] = entries;
+        if (!e) return;
+        if (e.isIntersecting && e.intersectionRatio >= 0.25) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: [0, 0.25, 0.5, 1], rootMargin: '0px' }
+    );
+    io.observe(section);
+    return () => io.disconnect();
+  }, []);
 
   return (
-    <section className="relative flex min-h-[85vh] flex-col justify-end overflow-hidden md:min-h-[90vh]">
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-[85vh] flex-col justify-end overflow-hidden md:min-h-[90vh]"
+    >
       {/* Background */}
       <div className="absolute inset-0">
         {HERO_VIDEO_URL ? (
           <video
+            ref={videoRef}
             autoPlay
             muted
             loop
             playsInline
+            preload="metadata"
             className="absolute inset-0 h-full w-full object-cover"
             poster={HERO_IMAGE_URL}
           >
@@ -78,10 +107,10 @@ export function Hero() {
         ) : (
           <Image
             src={HERO_IMAGE_URL}
-            alt=""
+            alt="Rami The Barber – hero"
             fill
             priority
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, 1200px"
             className="object-cover"
           />
         )}
@@ -142,20 +171,10 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.6 }}
-      >
-        <motion.div
-          className="h-8 w-[1px] bg-gradient-to-b from-transparent to-white/40"
-          animate={{ scaleY: [0, 1, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ originY: 0 }}
-        />
-      </motion.div>
+      {/* Scroll indicator – CSS-only to avoid continuous framer-motion updates */}
+      <div className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex hero-scroll-indicator-fade">
+        <div className="h-8 w-px bg-gradient-to-b from-transparent to-white/40 animate-scroll-line origin-top" />
+      </div>
     </section>
   );
 }

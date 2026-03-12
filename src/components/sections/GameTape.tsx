@@ -1,9 +1,14 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
-import { VideoGrid } from '@/components/VideoGrid';
 import { SectionHeading } from '@/components/SectionHeading';
 import { VIDEOS, INSTAGRAM_URL } from '@/lib/content';
+
+const VideoGrid = dynamic(
+  () => import('@/components/VideoGrid').then((m) => ({ default: m.VideoGrid })),
+  { ssr: true }
+);
 
 export function GameTape() {
   return (

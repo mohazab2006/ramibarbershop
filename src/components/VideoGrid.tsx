@@ -1,7 +1,6 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
 import { useCallback, useState } from 'react';
 import type { VideoItem } from '@/lib/content';
 
@@ -28,12 +27,12 @@ export function VideoGrid({ videos }: VideoGridProps) {
             onClick={() => setActive(video)}
             className="group relative aspect-[9/16] overflow-hidden rounded-lg bg-dark-card focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dark-bg"
           >
-            <Image
+            <img
               src={video.poster}
               alt={video.title ?? 'Video'}
-              fill
-              sizes="(max-width: 768px) 50vw, 33vw"
-              className="object-cover transition duration-300 group-hover:scale-105"
+              className="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
             />
             <div className="absolute inset-0 bg-black/30 transition group-hover:bg-black/20" />
             <div className="absolute inset-0 flex items-center justify-center">

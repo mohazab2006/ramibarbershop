@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useBooking } from '@/context/BookingContext';
 import { BookButton } from '@/components/BookButton';
@@ -28,13 +27,12 @@ export function About() {
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
-            <Image
+            <img
               src={ABOUT_PHOTO_URL}
               alt="Rami the Barber"
-              fill
-              sizes="(max-width: 768px) 100vw, 340px"
-              className="object-cover"
-              priority={false}
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
           </motion.div>
 

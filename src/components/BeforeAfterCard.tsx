@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useMemo, useState } from 'react';
 import type { BeforeAfterItem } from '@/lib/content';
@@ -33,22 +32,22 @@ export function BeforeAfterCard({ item, index = 0 }: BeforeAfterCardProps) {
       <div className="relative aspect-[4/5] w-full overflow-hidden">
         {/* After (full image underneath) */}
         <div className="absolute inset-0" style={afterStyle}>
-          <Image
+          <img
             src={item.after}
             alt="After"
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover"
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
           />
         </div>
         {/* Before (clipped) */}
         <div className="absolute inset-0" style={beforeStyle}>
-          <Image
+          <img
             src={item.before}
             alt="Before"
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover"
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
           />
         </div>
         {/* Divider line */}

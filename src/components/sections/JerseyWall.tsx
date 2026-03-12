@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCallback, useState } from 'react';
 import { SectionHeading } from '@/components/SectionHeading';
@@ -37,12 +36,12 @@ export function JerseyWall() {
               }}
               className="glow-card group relative aspect-square overflow-hidden rounded-lg bg-dark-card focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
-              <Image
+              <img
                 src={src}
-                alt=""
-                fill
-                sizes="(max-width: 768px) 50vw, 33vw"
-                className="object-cover transition duration-500 group-hover:scale-110"
+                alt="Gallery – barber work"
+                className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                loading="lazy"
+                decoding="async"
               />
               {/* Hover overlay */}
               <div className="absolute inset-0 bg-black/0 transition duration-300 group-hover:bg-black/20" />
@@ -73,7 +72,7 @@ export function JerseyWall() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 200, damping: 25 }}
-              className="relative max-h-[85vh] max-w-3xl overflow-hidden rounded-xl"
+              className="relative max-h-[85vh] max-w-3xl overflow-hidden rounded-xl min-h-[50vh] flex items-center justify-center"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -86,12 +85,12 @@ export function JerseyWall() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              <Image
+              <img
                 src={lightbox}
-                alt=""
+                alt="Gallery full size"
+                className="max-h-[85vh] w-auto max-w-full object-contain block"
                 width={900}
                 height={900}
-                className="h-auto max-h-[85vh] w-auto object-contain"
               />
             </motion.div>
           </motion.div>

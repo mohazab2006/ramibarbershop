@@ -12,19 +12,30 @@ export function CursorGlow() {
   const y = useSpring(mouseY, { stiffness: 150, damping: 20 });
 
   useEffect(() => {
-    // Only show on devices with a fine pointer (no touch)
     const mq = window.matchMedia('(pointer: fine)');
     if (!mq.matches) return;
 
     setVisible(true);
 
+    let rafId: number | null = null;
+    let pendingX = 0;
+    let pendingY = 0;
     const handleMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
+      pendingX = e.clientX;
+      pendingY = e.clientY;
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        mouseX.set(pendingX);
+        mouseY.set(pendingY);
+        rafId = null;
+      });
     };
 
     window.addEventListener('mousemove', handleMove);
-    return () => window.removeEventListener('mousemove', handleMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMove);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, [mouseX, mouseY]);
 
   if (!visible) return null;

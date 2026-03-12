@@ -20,6 +20,62 @@
   animation: shimmer 4s linear infinite;
 }
 
+/* Hero scroll indicator – CSS-only to avoid framer-motion every frame */
+@keyframes scroll-line-pulse {
+  0%, 100% { transform: scaleY(0); }
+  50% { transform: scaleY(1); }
+}
+@keyframes scroll-arrow-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+.animate-scroll-line {
+  transform-origin: top;
+  animation: scroll-line-pulse 2s ease-in-out infinite;
+}
+.animate-scroll-arrow {
+  animation: scroll-arrow-bounce 1.5s ease-in-out infinite;
+}
+.hero-scroll-indicator-fade {
+  animation: heroScrollFadeIn 0.6s ease-out 1.5s both;
+}
+@keyframes heroScrollFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Background glow orbs – CSS-only for compositor, no JS animation cost */
+@keyframes bgGlow1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(80px, 50px) scale(1.2); }
+  66% { transform: translate(-40px, -30px) scale(0.9); }
+}
+@keyframes bgGlow2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-60px, -40px) scale(0.85); }
+  66% { transform: translate(40px, 60px) scale(1.15); }
+}
+@keyframes bgGlow3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(60px, -60px) scale(1.1); }
+  66% { transform: translate(-50px, 40px) scale(0.9); }
+}
+@keyframes bgGlow4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-40px, 50px) scale(1.15); }
+  66% { transform: translate(30px, -30px) scale(0.95); }
+}
+@keyframes bgGlow5 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(50px, -40px) scale(0.92); }
+  66% { transform: translate(-40px, 50px) scale(1.08); }
+}
+.bg-glow-1 { animation: bgGlow1 22s ease-in-out infinite; }
+.bg-glow-2 { animation: bgGlow2 28s ease-in-out infinite; }
+.bg-glow-3 { animation: bgGlow3 32s ease-in-out infinite; }
+.bg-glow-4 { animation: bgGlow4 26s ease-in-out infinite; }
+.bg-glow-5 { animation: bgGlow5 30s ease-in-out infinite; }
+
 /* Glow card hover effect */
 .glow-card {
   position: relative;

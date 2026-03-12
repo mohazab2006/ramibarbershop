@@ -1,107 +1,57 @@
-'use client';
-
-import { motion } from 'framer-motion';
-
+/**
+ * Ambient background glows. Uses CSS keyframes only (no framer-motion) so the
+ * compositor handles animation and JS main thread stays free.
+ */
 export function BackgroundEffects() {
   return (
     <div className="fixed inset-0 z-0 overflow-hidden" aria-hidden>
       {/* Glow 1 — top-left, light grey */}
-      <motion.div
-        className="absolute -left-[15%] -top-[10%] h-[80vh] w-[80vh] rounded-full"
+      <div
+        className="absolute -left-[15%] -top-[10%] h-[80vh] w-[80vh] rounded-full bg-glow-1"
         style={{
           background:
             'radial-gradient(circle, rgba(180,180,190,0.12) 0%, rgba(180,180,190,0.04) 40%, transparent 70%)',
           filter: 'blur(80px)',
         }}
-        animate={{
-          x: [0, 80, -40, 0],
-          y: [0, 50, -30, 0],
-          scale: [1, 1.2, 0.9, 1],
-        }}
-        transition={{
-          duration: 22,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
       />
 
       {/* Glow 2 — bottom-right, cool grey */}
-      <motion.div
-        className="absolute -bottom-[10%] -right-[10%] h-[75vh] w-[75vh] rounded-full"
+      <div
+        className="absolute -bottom-[10%] -right-[10%] h-[75vh] w-[75vh] rounded-full bg-glow-2"
         style={{
           background:
             'radial-gradient(circle, rgba(160,165,175,0.11) 0%, rgba(160,165,175,0.03) 40%, transparent 70%)',
           filter: 'blur(90px)',
         }}
-        animate={{
-          x: [0, -60, 40, 0],
-          y: [0, -40, 60, 0],
-          scale: [1, 0.85, 1.15, 1],
-        }}
-        transition={{
-          duration: 28,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
       />
 
       {/* Glow 3 — center-left, neutral grey */}
-      <motion.div
-        className="absolute left-[10%] top-[50%] h-[55vh] w-[55vh] rounded-full"
+      <div
+        className="absolute left-[10%] top-[50%] h-[55vh] w-[55vh] rounded-full bg-glow-3"
         style={{
           background:
             'radial-gradient(circle, rgba(200,200,210,0.10) 0%, rgba(200,200,210,0.03) 40%, transparent 70%)',
           filter: 'blur(100px)',
         }}
-        animate={{
-          x: [0, 60, -50, 0],
-          y: [0, -60, 40, 0],
-          scale: [1, 1.1, 0.9, 1],
-        }}
-        transition={{
-          duration: 32,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
       />
 
       {/* Glow 4 — top-right, warm grey */}
-      <motion.div
-        className="absolute -top-[5%] right-[5%] h-[50vh] w-[50vh] rounded-full"
+      <div
+        className="absolute -top-[5%] right-[5%] h-[50vh] w-[50vh] rounded-full bg-glow-4"
         style={{
           background:
             'radial-gradient(circle, rgba(190,185,180,0.10) 0%, rgba(190,185,180,0.02) 40%, transparent 70%)',
           filter: 'blur(90px)',
         }}
-        animate={{
-          x: [0, -40, 30, 0],
-          y: [0, 50, -30, 0],
-          scale: [1, 1.15, 0.95, 1],
-        }}
-        transition={{
-          duration: 26,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
       />
 
       {/* Glow 5 — bottom-left, silver */}
-      <motion.div
-        className="absolute -bottom-[5%] left-[20%] h-[45vh] w-[45vh] rounded-full"
+      <div
+        className="absolute -bottom-[5%] left-[20%] h-[45vh] w-[45vh] rounded-full bg-glow-5"
         style={{
           background:
             'radial-gradient(circle, rgba(170,175,185,0.09) 0%, rgba(170,175,185,0.02) 40%, transparent 70%)',
           filter: 'blur(100px)',
-        }}
-        animate={{
-          x: [0, 50, -40, 0],
-          y: [0, -40, 50, 0],
-          scale: [1, 0.92, 1.08, 1],
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: 'easeInOut',
         }}
       />
 

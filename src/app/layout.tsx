@@ -1,12 +1,24 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
 import { BookingProvider } from '@/context/BookingContext';
 import { Nav } from '@/components/Nav';
-
-import { BackgroundEffects } from '@/components/BackgroundEffects';
-import { ScrollProgress } from '@/components/ScrollProgress';
-import { CursorGlow } from '@/components/CursorGlow';
 import './globals.css';
+
+const BackgroundEffects = dynamic(
+  () => import('@/components/BackgroundEffects').then((m) => ({ default: m.BackgroundEffects })),
+  { ssr: true }
+);
+
+const ScrollProgress = dynamic(
+  () => import('@/components/ScrollProgress').then((m) => ({ default: m.ScrollProgress })),
+  { ssr: true }
+);
+
+const CursorGlow = dynamic(
+  () => import('@/components/CursorGlow').then((m) => ({ default: m.CursorGlow })),
+  { ssr: true }
+);
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
