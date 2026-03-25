@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useBooking } from '@/context/BookingContext';
 import { BookButton } from '@/components/BookButton';
 import { HERO_IMAGE_URL, HERO_VIDEO_URL } from '@/lib/content';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function smoothScrollToEl(id: string) {
   const el = document.getElementById(id);
@@ -62,17 +62,25 @@ export function Hero() {
   const { openBooking } = useBooking();
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const hasPlayedRef = useRef(false);
+  const [videoEnded, setVideoEnded] = useState(false);
 
   // Pause hero video when section is out of view to save CPU/battery
   useEffect(() => {
-    if (!HERO_VIDEO_URL || !sectionRef.current || !videoRef.current) return;
+    if (!HERO_VIDEO_URL || videoEnded || !sectionRef.current || !videoRef.current) return;
     const video = videoRef.current;
     const section = sectionRef.current;
     const io = new IntersectionObserver(
       (entries) => {
         const [e] = entries;
         if (!e) return;
+        if (videoEnded) return;
         if (e.isIntersecting && e.intersectionRatio >= 0.25) {
+          // Avoid looping the hero video forever (big source of Storage egress).
+          // We play at most once; if the user scrolls away mid-play, we resume
+          // when it re-enters view until it ends.
+          if (!hasPlayedRef.current) hasPlayedRef.current = true;
+          if (hasPlayedRef.current && video.ended) return;
           video.play().catch(() => {});
         } else {
           video.pause();
@@ -82,7 +90,7 @@ export function Hero() {
     );
     io.observe(section);
     return () => io.disconnect();
-  }, []);
+  }, [videoEnded]);
 
   return (
     <section
@@ -91,16 +99,15 @@ export function Hero() {
     >
       {/* Background */}
       <div className="absolute inset-0">
-        {HERO_VIDEO_URL ? (
+        {HERO_VIDEO_URL && !videoEnded ? (
           <video
             ref={videoRef}
-            autoPlay
             muted
-            loop
             playsInline
             preload="metadata"
             className="absolute inset-0 h-full w-full object-cover"
             poster={HERO_IMAGE_URL}
+            onEnded={() => setVideoEnded(true)}
           >
             <source src={HERO_VIDEO_URL} type="video/mp4" />
           </video>

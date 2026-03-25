@@ -97,9 +97,8 @@ function VideoModal({
                 src={`/api/proxy-video?url=${encodeURIComponent(video.src)}`}
                 poster={video.poster}
                 controls
-                autoPlay
                 playsInline
-                preload="auto"
+                preload="none"
                 className="h-full w-full object-cover"
               />
             </div>
